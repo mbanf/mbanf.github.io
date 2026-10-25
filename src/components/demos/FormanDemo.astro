@@ -1,0 +1,164 @@
+---
+// Interactive: Forman–Ricci curvature on a small graph and the curvature-guided
+// graph-to-hypergraph lifting from the paper (arXiv:2508.11390).
+---
+<div class="demo" id="forman-demo">
+  <div class="demo-head">
+    <span><strong>Demo</strong> · Forman–Ricci curvature and structural lifting</span>
+    <span class="muted">unweighted: Ric<sub>F</sub>(u,v) = 4 − deg(u) − deg(v)</span>
+  </div>
+  <canvas width="1000" height="560" aria-label="Graph with edges coloured by Forman–Ricci curvature and hyperedges drawn as hulls"></canvas>
+  <div class="controls">
+    <label>threshold θ <input type="range" min="0" max="100" value="25" step="1" data-theta /> <output data-theta-out>—</output></label>
+    <label><input type="checkbox" data-labels checked /> show curvature on edges</label>
+    <button type="button" data-regen>new random graph</button>
+    <span class="faint">edges with Ric<sub>F</sub> &lt; θ (blue) form the backbone; connected runs of them become hyperedges (hulls)</span>
+  </div>
+</div>
+
+<script>
+  const root = document.getElementById('forman-demo')!;
+  const canvas = root.querySelector('canvas')!;
+  const ctx = canvas.getContext('2d')!;
+  const slider = root.querySelector<HTMLInputElement>('[data-theta]')!;
+  const out = root.querySelector<HTMLOutputElement>('[data-theta-out]')!;
+  const labelsBox = root.querySelector<HTMLInputElement>('[data-labels]')!;
+  const regen = root.querySelector<HTMLButtonElement>('[data-regen]')!;
+
+  type Node = { x: number; y: number; vx: number; vy: number; c: number };
+  type Edge = [number, number];
+  let nodes: Node[] = [];
+  let edges: Edge[] = [];
+  let ric: number[] = [];
+  let rmin = 0, rmax = 0;
+
+  function rand(n: number) { return Math.floor(Math.random() * n); }
+
+  function makeGraph() {
+    nodes = []; edges = [];
+    const W = canvas.width, H = canvas.height;
+    const centers = [[W * 0.22, H * 0.5], [W * 0.78, H * 0.42], [W * 0.5, H * 0.82]];
+    const sizes = [9, 9, 6];
+    const idx: number[][] = [];
+    centers.forEach(([cx, cy], c) => {
+      const ids: number[] = [];
+      for (let i = 0; i < sizes[c]; i++) {
+        nodes.push({ x: cx + (Math.random() - 0.5) * 160, y: cy + (Math.random() - 0.5) * 160, vx: 0, vy: 0, c });
+        ids.push(nodes.length - 1);
+      }
+      idx.push(ids);
+      // dense intra-community edges
+      for (let i = 0; i < ids.length; i++) for (let j = i + 1; j < ids.length; j++) if (Math.random() < 0.55) edges.push([ids[i], ids[j]]);
+      // make sure it is connected
+      for (let i = 1; i < ids.length; i++) if (!edges.some(([a, b]) => (a === ids[i] && ids.includes(b)) || (b === ids[i] && ids.includes(a)))) edges.push([ids[i - 1], ids[i]]);
+    });
+    // bridges: chains of 1–2 intermediate nodes between communities
+    const bridge = (A: number[], B: number[]) => {
+      const k = 1 + rand(2);
+      let prev = A[rand(A.length)];
+      for (let i = 0; i < k; i++) {
+        const a = nodes[prev], b = nodes[B[0]];
+        nodes.push({ x: (a.x + b.x) / 2 + (Math.random() - 0.5) * 60, y: (a.y + b.y) / 2 + (Math.random() - 0.5) * 60, vx: 0, vy: 0, c: 3 });
+        edges.push([prev, nodes.length - 1]);
+        prev = nodes.length - 1;
+      }
+      edges.push([prev, B[rand(B.length)]]);
+    };
+    bridge(idx[0], idx[1]); bridge(idx[1], idx[2]); if (Math.random() < 0.5) bridge(idx[0], idx[2]);
+    layout();
+    curvature();
+  }
+
+  function layout() {
+    const W = canvas.width, H = canvas.height;
+    for (let it = 0; it < 300; it++) {
+      const k = 0.02 * (1 - it / 300) + 0.004;
+      nodes.forEach((n, i) => {
+        let fx = 0, fy = 0;
+        nodes.forEach((m, j) => {
+          if (i === j) return;
+          const dx = n.x - m.x, dy = n.y - m.y, d2 = dx * dx + dy * dy + 1, d = Math.sqrt(d2);
+          const rep = 9000 / d2; fx += (dx / d) * rep; fy += (dy / d) * rep;
+        });
+        edges.forEach(([a, b]) => {
+          if (a !== i && b !== i) return;
+          const m = nodes[a === i ? b : a];
+          const dx = m.x - n.x, dy = m.y - n.y, d = Math.sqrt(dx * dx + dy * dy) + 0.01;
+          const att = (d - 70) * 0.08; fx += (dx / d) * att; fy += (dy / d) * att;
+        });
+        fx += (W / 2 - n.x) * 0.002; fy += (H / 2 - n.y) * 0.002;
+        n.vx = (n.vx + fx * k) * 0.8; n.vy = (n.vy + fy * k) * 0.8;
+      });
+      nodes.forEach((n) => { n.x = Math.min(W - 40, Math.max(40, n.x + n.vx)); n.y = Math.min(H - 40, Math.max(40, n.y + n.vy)); });
+    }
+  }
+
+  function curvature() {
+    const deg = new Array(nodes.length).fill(0);
+    edges.forEach(([a, b]) => { deg[a]++; deg[b]++; });
+    ric = edges.map(([a, b]) => 4 - deg[a] - deg[b]);
+    rmin = Math.min(...ric); rmax = Math.max(...ric);
+  }
+
+  function theta() {
+    const q = Number(slider.value) / 100;
+    return rmin + q * (rmax - rmin);
+  }
+
+  function components(mask: boolean[]) {
+    // connected components of the subgraph formed by masked edges; returns node sets
+    const parent = nodes.map((_, i) => i);
+    const find = (i: number): number => (parent[i] === i ? i : (parent[i] = find(parent[i])));
+    edges.forEach(([a, b], e) => { if (mask[e]) parent[find(a)] = find(b); });
+    const groups = new Map<number, number[]>();
+    edges.forEach(([a, b], e) => { if (!mask[e]) return; const r = find(a); if (!groups.has(r)) groups.set(r, []); const g = groups.get(r)!; if (!g.includes(a)) g.push(a); if (!g.includes(b)) g.push(b); });
+    return [...groups.values()].filter((g) => g.length >= 2);
+  }
+
+  function hull(pts: { x: number; y: number }[]) {
+    if (pts.length < 3) return pts;
+    const p = [...pts].sort((a, b) => a.x - b.x || a.y - b.y);
+    const cross = (o: any, a: any, b: any) => (a.x - o.x) * (b.y - o.y) - (a.y - o.y) * (b.x - o.x);
+    const lower: any[] = []; for (const q of p) { while (lower.length >= 2 && cross(lower[lower.length - 2], lower[lower.length - 1], q) <= 0) lower.pop(); lower.push(q); }
+    const upper: any[] = []; for (const q of p.slice().reverse()) { while (upper.length >= 2 && cross(upper[upper.length - 2], upper[upper.length - 1], q) <= 0) upper.pop(); upper.push(q); }
+    return lower.slice(0, -1).concat(upper.slice(0, -1));
+  }
+
+  function draw() {
+    const th = theta();
+    out.value = `θ = ${th.toFixed(2)}  (range ${rmin} … ${rmax})`;
+    const dark = matchMedia('(prefers-color-scheme: dark)').matches && document.documentElement.dataset.theme !== 'light' || document.documentElement.dataset.theme === 'dark';
+    const fg = dark ? '#e8e6e1' : '#1f2328', bg = dark ? '#1b1e24' : '#ffffff', faint = dark ? '#767c86' : '#8b929b';
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = bg; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    const mask = ric.map((r) => r < th);
+    // hyperedges as hulls
+    components(mask).forEach((g) => {
+      const pts = hull(g.map((i) => nodes[i]));
+      ctx.beginPath();
+      if (pts.length < 3) { const a = pts[0], b = pts[1] ?? pts[0]; ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.lineWidth = 40; ctx.lineCap = 'round'; ctx.strokeStyle = 'rgba(59,95,168,0.14)'; ctx.stroke(); }
+      else { pts.forEach((p, i) => (i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y))); ctx.closePath(); ctx.lineJoin = 'round'; ctx.lineWidth = 44; ctx.strokeStyle = 'rgba(59,95,168,0.14)'; ctx.stroke(); ctx.fillStyle = 'rgba(59,95,168,0.14)'; ctx.fill(); }
+    });
+    // edges
+    edges.forEach(([a, b], e) => {
+      const r = ric[e];
+      ctx.beginPath(); ctx.moveTo(nodes[a].x, nodes[a].y); ctx.lineTo(nodes[b].x, nodes[b].y);
+      ctx.lineWidth = mask[e] ? 3.5 : 1.6; ctx.strokeStyle = mask[e] ? '#3b5fa8' : (dark ? '#c0574a' : '#b5542a'); ctx.globalAlpha = mask[e] ? 1 : 0.7; ctx.stroke(); ctx.globalAlpha = 1;
+      if (labelsBox.checked) {
+        const mx = (nodes[a].x + nodes[b].x) / 2, my = (nodes[a].y + nodes[b].y) / 2;
+        ctx.font = '11px ui-monospace, Menlo, monospace'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        const t = String(r); const w = ctx.measureText(t).width + 6;
+        ctx.fillStyle = bg; ctx.fillRect(mx - w / 2, my - 7, w, 14);
+        ctx.fillStyle = faint; ctx.fillText(t, mx, my);
+      }
+    });
+    // nodes
+    nodes.forEach((n) => { ctx.beginPath(); ctx.arc(n.x, n.y, 7, 0, Math.PI * 2); ctx.fillStyle = bg; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = fg; ctx.stroke(); });
+  }
+
+  slider.addEventListener('input', draw);
+  labelsBox.addEventListener('change', draw);
+  regen.addEventListener('click', () => { makeGraph(); draw(); });
+  new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  makeGraph(); draw();
+</script>

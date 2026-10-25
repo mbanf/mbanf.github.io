@@ -1,0 +1,24 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import topics from '../data/topics.json';
+
+interface Props { project: CollectionEntry<'projects'>; showEra?: boolean }
+const { project } = Astro.props;
+const d = project.data;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const years = d.end ? (d.start === d.end ? `${d.start}` : `${d.start}–${d.end}`) : `${d.start}–`;
+const topicObjs = d.topics.map((id) => topics.find((t) => t.id === id)).filter(Boolean);
+---
+<a class="card" href={`${base}/projects/${project.id}/`} data-topics={d.topics.join(' ')}>
+  <div class={`thumb ${d.hero.fit === 'contain' ? 'contain' : ''}`}>
+    <img src={`${base}${d.thumb ?? d.hero.src}`} alt="" loading="lazy" decoding="async" style={d.hero.position ? `object-position:${d.hero.position}` : undefined} />
+  </div>
+  <div class="body">
+    <div class="kicker"><span>{years}</span>{d.status === 'ongoing' && <span class="status">ongoing</span>}</div>
+    <h3>{d.title}</h3>
+    <p class="sub">{d.subtitle ?? d.summary}</p>
+    <div class="chips">
+      {topicObjs.map((t) => <span class="chip" style={`--chip:${t!.color}`}><span class="dot"></span>{t!.short}</span>)}
+    </div>
+  </div>
+</a>

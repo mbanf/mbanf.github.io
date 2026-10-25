@@ -1,0 +1,47 @@
+[
+  {
+    "id": "siegen",
+    "title": "Computer vision, graphics & assistive technology",
+    "place": "University of Siegen · PhD with Volker Blanz",
+    "start": 2008,
+    "end": 2013,
+    "kind": "academia",
+    "blurb": "Example-based rendering, procedural cities, and a doctoral thesis on making images audible for blind users — modular computer-vision sonification that became the PictureSensation app."
+  },
+  {
+    "id": "carnegie",
+    "title": "Computational biology",
+    "place": "Carnegie Institution for Science, Stanford · Rhee lab",
+    "start": 2014,
+    "end": 2019,
+    "kind": "academia",
+    "blurb": "Postdoc on gene regulation and plant metabolism: Markov-random-field refinement of gene regulatory networks (GRACE), METACLUSTER for metabolic gene clusters, and the Plant Metabolic Network enzyme/pathway pipeline."
+  },
+  {
+    "id": "fabforce",
+    "title": "Machine learning in manufacturing",
+    "place": "fabforce · industrial ML & retrofits",
+    "start": 2019,
+    "end": 2022,
+    "kind": "industry",
+    "blurb": "Co-developed the Integrated System Solution approach and the ML offering: OPC UA retrofits for press and milling machines, tool-wear prediction from low-cost sensors, and model monitoring with deep feature embeddings."
+  },
+  {
+    "id": "generegulation",
+    "title": "Gene regulation, continued",
+    "place": "with Thomas Hartwig (HHU Düsseldorf / MPIPZ Cologne) · EducatedGuess.ai",
+    "start": 2020,
+    "end": null,
+    "kind": "academia",
+    "blurb": "A thread that never stopped: allele-specific ChIP-seq, the maize pan-cistrome and binding QTL (Nature Genetics 2025), METACLUSTERplus, and now sequence models that predict, explain and design TF-binding variation."
+  },
+  {
+    "id": "perelyn",
+    "title": "AI engineering & geometric deep learning",
+    "place": "Perelyn, Munich",
+    "start": 2023,
+    "end": null,
+    "kind": "industry",
+    "blurb": "Topological deep learning (TopoBench, the ICML TDL challenges, curvature-based lifting against over-squashing), GraphRAG with plugin ontologies, memory-aware software agents, and MCP in manufacturing."
+  }
+]

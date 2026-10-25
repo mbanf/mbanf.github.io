@@ -1,0 +1,15 @@
+{
+  "name": "Michael Banf",
+  "tagline": "Machine learning for gene regulation, graphs and the factory floor.",
+  "intro": "I am a machine-learning researcher and engineer at Perelyn in Munich. My work sits where probabilistic modelling meets messy real systems: gene regulatory networks and transcription-factor binding in plants, geometric and topological deep learning, knowledge graphs for language-model agents, and condition monitoring in manufacturing. I did a PhD in computer vision at the University of Siegen, a postdoc in computational biology at the Carnegie Institution for Science at Stanford, and spent several years building industrial ML at fabforce before joining Perelyn.",
+  "location": "Munich, Germany",
+  "affiliation": "Perelyn",
+  "email": "michael.banf@perelyn.com",
+  "links": {
+    "scholar": "https://scholar.google.com/citations?user=XWMdnRsAAAAJ",
+    "github": "https://github.com/mbanf",
+    "linkedin": "",
+    "orcid": ""
+  },
+  "interests": ["Machine Learning", "AI Engineering", "Geometric Deep Learning", "Computational Genomics"]
+}

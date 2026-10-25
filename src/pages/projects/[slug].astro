@@ -1,0 +1,87 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import FormanDemo from '../../components/demos/FormanDemo.astro';
+import eras from '../../data/eras.json';
+import topics from '../../data/topics.json';
+import publications from '../../data/publications.json';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((p) => ({ params: { slug: p.id }, props: { project: p } }));
+}
+const { project } = Astro.props;
+const d = project.data;
+const { Content } = await render(project);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const era = eras.find((e) => e.id === d.era);
+const topicObjs = d.topics.map((id) => topics.find((t) => t.id === id)).filter(Boolean);
+const years = d.end ? `${d.start}–${d.end}` : `since ${d.start}`;
+const pubs = publications.filter((p) => p.project === project.id).sort((a, b) => b.year - a.year);
+const all = await getCollection('projects');
+const related = all
+  .filter((p) => p.id !== project.id && p.data.topics.some((t) => d.topics.includes(t)))
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
+---
+<Base title={d.title} description={d.summary} image={d.hero.src}>
+  <article class="wrap">
+    <header class="project-hero">
+      <div class="eyebrow">
+        <span>{years}</span>
+        {era && <a href={`${base}/#era-${era.id}`}>{era.place}</a>}
+        {d.status === 'ongoing' && <span style="color:var(--accent)">ongoing</span>}
+      </div>
+      <h1>{d.title}</h1>
+      {d.subtitle && <p class="subtitle">{d.subtitle}</p>}
+      <div class="chips" style="margin-bottom:28px">
+        {topicObjs.map((t) => <a class="chip" href={`${base}/#topic-${t!.id}`} style={`--chip:${t!.color}`}><span class="dot"></span>{t!.title}</a>)}
+      </div>
+      <figure class="figure">
+        <div class="frame"><img src={`${base}${d.hero.src}`} alt={d.hero.alt} /></div>
+        {d.hero.caption && <figcaption>{d.hero.caption}</figcaption>}
+      </figure>
+    </header>
+
+    <div class="project-grid">
+      <div class="prose">
+        <p class="summary-box">{d.summary}</p>
+        <Content />
+        {d.demo === 'forman' && <FormanDemo />}
+        {d.figures.length > 0 && (
+          <div class="figures">
+            {d.figures.map((f) => (
+              <figure class="figure">
+                <div class="frame"><img src={`${base}${f.src}`} alt={f.alt} loading="lazy" /></div>
+                {f.caption && <figcaption>{f.caption}</figcaption>}
+              </figure>
+            ))}
+          </div>
+        )}
+        <div class="ask-box" id="ask">
+          <strong>Ask about this project</strong> — coming soon. This page ships a machine-readable context pack
+          (<a href={`${base}/context/${project.id}.json`}>context/{project.id}.json</a>) so an assistant can answer questions about it.
+        </div>
+      </div>
+
+      <aside class="aside">
+        {d.role && <div><h4>My role</h4><p class="muted" style="margin:0">{d.role}</p></div>}
+        {d.collaborators.length > 0 && <div><h4>With</h4><ul>{d.collaborators.map((c) => <li>{c}</li>)}</ul></div>}
+        {d.links.filter((l) => l.url).length > 0 && (
+          <div><h4>Links</h4><ul>{d.links.filter((l) => l.url).map((l) => <li><a href={l.url} target="_blank" rel="noopener">{l.label}</a></li>)}</ul></div>
+        )}
+        {pubs.length > 0 && (
+          <div><h4>Publications</h4><ul>{pubs.map((p) => <li>{p.url ? <a href={p.url} target="_blank" rel="noopener">{p.title}</a> : p.title} <span class="faint">({p.year})</span></li>)}</ul></div>
+        )}
+      </aside>
+    </div>
+
+    {related.length > 0 && (
+      <section class="related">
+        <h2>Related work</h2>
+        <div class="cards">{related.map((p) => <ProjectCard project={p} />)}</div>
+      </section>
+    )}
+  </article>
+</Base>

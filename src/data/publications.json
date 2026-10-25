@@ -1,0 +1,465 @@
+[
+  {
+    "year": 2026,
+    "title": "Proceedings of the Second Workshop on AI in Production",
+    "authors": "A. Alsheikh, A. Fischer, M. Banf, J. Kuhn, L. Fichtel, D. Seuß, A. Marchl et al. (eds.)",
+    "venue": "Otto-Friedrich-Universität Bamberg",
+    "type": "proceedings",
+    "topics": [
+      "manufacturing-ml"
+    ],
+    "project": null,
+    "url": ""
+  },
+  {
+    "year": 2026,
+    "title": "Memory-Aware Software Engineering Agents: Architectures, Mechanisms, and Open Gaps",
+    "authors": "M. Banf, S. Garcarz, J. Kuhn, M. Becker",
+    "venue": "Workshop on Application of AI for Software Engineering",
+    "type": "workshop",
+    "topics": [
+      "knowledge-graphs"
+    ],
+    "project": "graphrag",
+    "url": ""
+  },
+  {
+    "year": 2025,
+    "title": "Genetic variation at transcription factor binding sites largely explains phenotypic heritability in maize",
+    "authors": "J. Engelhorn, S. J. Snodgrass, A. Kok, A. S. Seetharam, M. Schneider, T. Kiwit, A. Singh, M. Banf, … , J. Ross-Ibarra, T. Hartwig",
+    "venue": "Nature Genetics 57, 2313–2322",
+    "type": "journal",
+    "topics": [
+      "binding-variation",
+      "gene-regulation"
+    ],
+    "project": "maize-bqtl",
+    "url": "https://doi.org/10.1038/s41588-025-02246-7"
+  },
+  {
+    "year": 2025,
+    "title": "Model Context Protocol in Manufacturing: A Comprehensive Framework for AI-Driven Industry 4.0?",
+    "authors": "M. Banf, J. Kuhn",
+    "venue": "Workshop on AI in Production",
+    "type": "workshop",
+    "topics": [
+      "manufacturing-ml",
+      "knowledge-graphs"
+    ],
+    "project": null,
+    "url": ""
+  },
+  {
+    "year": 2025,
+    "title": "A Remedy for Over-Squashing in Graph Learning via Forman-Ricci Curvature based Graph-to-Hypergraph Structural Lifting",
+    "authors": "M. Banf, D. Filipiak, M. Schattauer, L. Imasheva",
+    "venue": "HOOC Workshop, KWTH Aachen · arXiv:2508.11390",
+    "type": "preprint",
+    "topics": [
+      "geometric-dl"
+    ],
+    "project": "forman-ricci-lifting",
+    "url": "https://arxiv.org/abs/2508.11390"
+  },
+  {
+    "year": 2025,
+    "title": "Tripartite-GraphRAG via Plugin Ontologies",
+    "authors": "M. Banf, J. Kuhn",
+    "venue": "arXiv:2504.19667",
+    "type": "preprint",
+    "topics": [
+      "knowledge-graphs"
+    ],
+    "project": "graphrag",
+    "url": "https://arxiv.org/abs/2504.19667"
+  },
+  {
+    "year": 2025,
+    "title": "Topological Deep Learning Challenge 2025: Expanding the Data Landscape",
+    "authors": "G. Bernárdez, L. Telyatnikov, M. Papillon, M. Montagna, R. Theiler, … , M. Banf, …",
+    "venue": "Proceedings of Machine Learning Research 321, 4–14",
+    "type": "journal",
+    "topics": [
+      "geometric-dl"
+    ],
+    "project": "forman-ricci-lifting",
+    "url": ""
+  },
+  {
+    "year": 2024,
+    "title": "ICML Topological Deep Learning Challenge 2024: Beyond the Graph Domain",
+    "authors": "G. Bernárdez, L. Telyatnikov, M. Montagna, F. Baccini, M. Papillon, … , M. Banf, …",
+    "venue": "arXiv:2409.05211",
+    "type": "preprint",
+    "topics": [
+      "geometric-dl"
+    ],
+    "project": "forman-ricci-lifting",
+    "url": "https://arxiv.org/abs/2409.05211"
+  },
+  {
+    "year": 2024,
+    "title": "TopoBench: A Framework for Benchmarking Topological Deep Learning",
+    "authors": "L. Telyatnikov, G. Bernardez, M. Montagna, M. Hajij, M. Carrasco, … , M. Banf, D. Filipiak, M. Schattauer, L. Imasheva, …",
+    "venue": "arXiv:2406.06642",
+    "type": "preprint",
+    "topics": [
+      "geometric-dl"
+    ],
+    "project": "forman-ricci-lifting",
+    "url": "https://arxiv.org/abs/2406.06642"
+  },
+  {
+    "year": 2023,
+    "title": "Modern machine learning approaches for quantitative inference of gene regulation from genomic and epigenomic features",
+    "authors": "M. Banf, K. Zhao, T. Hartwig",
+    "venue": "Frontiers in Plant Science 14, 1330793",
+    "type": "journal",
+    "topics": [
+      "gene-regulation",
+      "genomic-fm"
+    ],
+    "project": "grace",
+    "url": "https://doi.org/10.3389/fpls.2023.1330793"
+  },
+  {
+    "year": 2023,
+    "title": "Hybrid allele-specific ChIP-seq analysis identifies variation in brassinosteroid-responsive transcription factor binding linked to traits in maize",
+    "authors": "T. Hartwig, M. Banf, G. P. Prietsch, J.-Y. Zhu, I. Mora-Ramírez, J. H. M. Schippers, S. J. Snodgrass, A. S. Seetharam, B. Huettel, J. M. Kolkman, J. Yang, J. Engelhorn, Z.-Y. Wang",
+    "venue": "Genome Biology 24, 108",
+    "type": "journal",
+    "topics": [
+      "binding-variation",
+      "gene-regulation"
+    ],
+    "project": "maize-bqtl",
+    "url": "https://doi.org/10.1186/s13059-023-02909-w"
+  },
+  {
+    "year": 2023,
+    "title": "ARSK1 activates TORC1 signaling to adjust growth to phosphate availability in Arabidopsis",
+    "authors": "H. Cho, M. Banf, Z. Shahzad, J. Van Leene, F. Bossi, S. Ruffel, N. Bouain, P. Cao, G. Krouk, G. De Jaeger, B. Lacombe, F. Brandizzi, S. Y. Rhee, H. Rouached",
+    "venue": "Current Biology 33(9), 1778–1786",
+    "type": "journal",
+    "topics": [
+      "gene-regulation"
+    ],
+    "project": "arsk1-phosphate",
+    "url": "https://doi.org/10.1016/j.cub.2023.03.005"
+  },
+  {
+    "year": 2023,
+    "title": "Phenotypic variation in maize can be largely explained by genetic variation at transcription factor binding sites",
+    "authors": "J. Engelhorn, S. J. Snodgrass, A. Kok, A. S. Seetharam, M. Schneider, T. Kiwit, … , M. Banf, … , T. Hartwig",
+    "venue": "bioRxiv 2023.08.08.551183",
+    "type": "preprint",
+    "topics": [
+      "binding-variation"
+    ],
+    "project": "maize-bqtl",
+    "url": "https://doi.org/10.1101/2023.08.08.551183"
+  },
+  {
+    "year": 2022,
+    "title": "METACLUSTERplus — an R package for probabilistic inference and visualization of context-specific transcriptional regulation of biosynthetic gene clusters",
+    "authors": "M. Banf",
+    "venue": "bioRxiv 2022.04.11.487835",
+    "type": "preprint",
+    "topics": [
+      "plant-metabolism",
+      "gene-regulation"
+    ],
+    "project": "metacluster",
+    "url": "https://doi.org/10.1101/2022.04.11.487835"
+  },
+  {
+    "year": 2022,
+    "title": "Artificial intelligence based tool wear and defect prediction for special purpose milling machinery using low-cost acceleration sensor retrofits",
+    "authors": "M. Kheir-Eddine, M. Banf, G. Steinhagen",
+    "venue": "arXiv:2202.03068",
+    "type": "preprint",
+    "topics": [
+      "manufacturing-ml"
+    ],
+    "project": "manufacturing-ml",
+    "url": "https://arxiv.org/abs/2202.03068"
+  },
+  {
+    "year": 2022,
+    "title": "Who supervises the supervisor? Model monitoring in production using deep feature embeddings with applications to workpiece inspection",
+    "authors": "M. Banf, G. Steinhagen",
+    "venue": "arXiv:2201.06599 · also: Proc. 8th World Congress on Electrical Engineering and Computer Systems and Science (2022)",
+    "type": "preprint",
+    "topics": [
+      "manufacturing-ml"
+    ],
+    "project": "manufacturing-ml",
+    "url": "https://arxiv.org/abs/2201.06599"
+  },
+  {
+    "year": 2021,
+    "title": "The Reasonable Effectiveness of Randomness in Scalable and Integrative Gene Regulatory Network Inference and Beyond",
+    "authors": "M. Banf, T. Hartwig",
+    "venue": "Computation 9(12), 146",
+    "type": "journal",
+    "topics": [
+      "gene-regulation"
+    ],
+    "project": "grace",
+    "url": "https://doi.org/10.3390/computation9120146"
+  },
+  {
+    "year": 2021,
+    "title": "A probabilistic framework for context-specific transcriptional regulation analysis of biosynthetic gene clusters",
+    "authors": "M. Banf",
+    "venue": "German Conference on Bioinformatics (GCB)",
+    "type": "conference",
+    "topics": [
+      "plant-metabolism",
+      "gene-regulation"
+    ],
+    "project": "metacluster",
+    "url": ""
+  },
+  {
+    "year": 2021,
+    "title": "Flexible On-Premises Datenanalyse für KMU",
+    "authors": "G. Steinhagen, M. Banf",
+    "venue": "VDI Wissensforum: Automation, 637–648",
+    "type": "conference",
+    "topics": [
+      "manufacturing-ml"
+    ],
+    "project": "manufacturing-ml",
+    "url": ""
+  },
+  {
+    "year": 2019,
+    "title": "Assessment of network module identification across complex diseases",
+    "authors": "S. Choobdar, M. E. Ahsen, J. Crawford, M. Tomasoni, T. Fang, D. Lamparter, … (DREAM Module Identification Challenge Consortium, incl. M. Banf)",
+    "venue": "Nature Methods 16, 843–852",
+    "type": "journal",
+    "topics": [
+      "gene-regulation",
+      "geometric-dl"
+    ],
+    "project": null,
+    "url": "https://doi.org/10.1038/s41592-019-0509-5"
+  },
+  {
+    "year": 2019,
+    "title": "METACLUSTER — an R package for context-specific expression analysis of metabolic gene clusters",
+    "authors": "M. Banf, K. Zhao, S. Y. Rhee",
+    "venue": "Bioinformatics 35(17), 3178–3180",
+    "type": "journal",
+    "topics": [
+      "plant-metabolism"
+    ],
+    "project": "metacluster",
+    "url": "https://doi.org/10.1093/bioinformatics/btz021"
+  },
+  {
+    "year": 2019,
+    "title": "Learning Theory and Support Vector Machines — a primer",
+    "authors": "M. Banf",
+    "venue": "arXiv:1902.04622",
+    "type": "preprint",
+    "topics": [],
+    "project": null,
+    "url": "https://arxiv.org/abs/1902.04622"
+  },
+  {
+    "year": 2019,
+    "title": "Deciphering the Regulatory Code of Metabolism in Arabidopsis thaliana",
+    "authors": "K. Zhao, M. Banf, P. Schläpfer, S. Y. Rhee",
+    "venue": "Plant and Animal Genome XXVII Conference",
+    "type": "conference",
+    "topics": [
+      "gene-regulation",
+      "plant-metabolism"
+    ],
+    "project": "metacluster",
+    "url": ""
+  },
+  {
+    "year": 2018,
+    "title": "Network module detection using recursive local graph sparsification and clustering",
+    "authors": "M. Banf",
+    "venue": "Preprints",
+    "type": "preprint",
+    "topics": [
+      "gene-regulation",
+      "geometric-dl"
+    ],
+    "project": null,
+    "url": ""
+  },
+  {
+    "year": 2018,
+    "title": "Genomic diversity of a nectar yeast clusters into metabolically, but not geographically, distinct lineages",
+    "authors": "M. K. Dhami, T. Hartwig, A. D. Letten, M. Banf, T. Fukami",
+    "venue": "Molecular Ecology 27(8), 2067–2076",
+    "type": "journal",
+    "topics": [
+      "plant-metabolism"
+    ],
+    "project": null,
+    "url": "https://doi.org/10.1111/mec.14535"
+  },
+  {
+    "year": 2018,
+    "title": "Open community challenge reveals molecular network modules with key roles in diseases",
+    "authors": "S. Choobdar, M. E. Ahsen, J. Crawford, M. Tomasoni, T. Fang, D. Lamparter, … (incl. M. Banf)",
+    "venue": "bioRxiv 265553",
+    "type": "preprint",
+    "topics": [
+      "gene-regulation"
+    ],
+    "project": null,
+    "url": "https://doi.org/10.1101/265553"
+  },
+  {
+    "year": 2017,
+    "title": "Genome-wide prediction of metabolic enzymes, pathways, and gene clusters in plants",
+    "authors": "P. Schläpfer, P. Zhang, C. Wang, T. Kim, M. Banf, L. Chae, K. Dreher, A. K. Chavali, R. Nilo-Poyanco, T. Bernard, D. Kahn, S. Y. Rhee",
+    "venue": "Plant Physiology 173(4), 2041–2059",
+    "type": "journal",
+    "topics": [
+      "plant-metabolism"
+    ],
+    "project": "metacluster",
+    "url": "https://doi.org/10.1104/pp.16.01942"
+  },
+  {
+    "year": 2017,
+    "title": "Enhancing gene regulatory network inference through data integration with Markov random fields",
+    "authors": "M. Banf, S. Y. Rhee",
+    "venue": "Scientific Reports 7, 41174",
+    "type": "journal",
+    "topics": [
+      "gene-regulation"
+    ],
+    "project": "grace",
+    "url": "https://doi.org/10.1038/srep41174"
+  },
+  {
+    "year": 2017,
+    "title": "Computational inference of gene regulatory networks: approaches, limitations and opportunities",
+    "authors": "M. Banf, S. Y. Rhee",
+    "venue": "Biochimica et Biophysica Acta (BBA) – Gene Regulatory Mechanisms 1860(1), 41–52",
+    "type": "journal",
+    "topics": [
+      "gene-regulation"
+    ],
+    "project": "grace",
+    "url": "https://doi.org/10.1016/j.bbagrm.2016.09.003"
+  },
+  {
+    "year": 2016,
+    "title": "iTAK: a program for genome-wide prediction and classification of plant transcription factors, transcriptional regulators, and protein kinases",
+    "authors": "Y. Zheng, C. Jiao, H. Sun, H. G. Rosli, M. A. Pombo, P. Zhang, M. Banf, X. Dai, … , Z. Fei",
+    "venue": "Molecular Plant 9(12), 1667–1670",
+    "type": "journal",
+    "topics": [
+      "gene-regulation"
+    ],
+    "project": null,
+    "url": "https://doi.org/10.1016/j.molp.2016.09.014"
+  },
+  {
+    "year": 2016,
+    "title": "PictureSensation — a mobile application to help the blind explore the visual world through touch and sound",
+    "authors": "M. Banf, R. Mikalay, B. Watzke, V. Blanz",
+    "venue": "Journal of Rehabilitation and Assistive Technologies Engineering 3",
+    "type": "journal",
+    "topics": [
+      "vision-assistive"
+    ],
+    "project": "sonification",
+    "url": "https://doi.org/10.1177/2055668316674582"
+  },
+  {
+    "year": 2015,
+    "title": "microProtein Prediction Program (miP3): A software for predicting microProteins and their target transcription factors",
+    "authors": "N. de Klein, E. Magnani, M. Banf, S. Y. Rhee",
+    "venue": "International Journal of Genomics 2015, 734147",
+    "type": "journal",
+    "topics": [
+      "gene-regulation"
+    ],
+    "project": null,
+    "url": "https://doi.org/10.1155/2015/734147"
+  },
+  {
+    "year": 2013,
+    "title": "Making the Visual World Audible: Auditory Image Understanding for the Visually Impaired Based on a Modular Computer Vision Sonification Model",
+    "authors": "M. Banf",
+    "venue": "Doctoral thesis, University of Siegen · Shaker Verlag",
+    "type": "thesis",
+    "topics": [
+      "vision-assistive"
+    ],
+    "project": "sonification",
+    "url": ""
+  },
+  {
+    "year": 2013,
+    "title": "Man made structure detection and verification of object recognition in images for the visually impaired",
+    "authors": "M. Banf, V. Blanz",
+    "venue": "Proc. 6th International Conference on Computer Vision / Computer Graphics Collaboration Techniques and Applications (MIRAGE)",
+    "type": "conference",
+    "topics": [
+      "vision-assistive"
+    ],
+    "project": "sonification",
+    "url": ""
+  },
+  {
+    "year": 2013,
+    "title": "Sonification of images for the visually impaired using a multi-level approach",
+    "authors": "M. Banf, V. Blanz",
+    "venue": "Proc. 4th Augmented Human International Conference, 162–169",
+    "type": "conference",
+    "topics": [
+      "vision-assistive"
+    ],
+    "project": "sonification",
+    "url": "https://doi.org/10.1145/2459236.2459264"
+  },
+  {
+    "year": 2012,
+    "title": "A modular computer vision sonification model for the visually impaired",
+    "authors": "M. Banf, V. Blanz",
+    "venue": "International Conference on Auditory Display (ICAD), Georgia Institute of Technology",
+    "type": "conference",
+    "topics": [
+      "vision-assistive"
+    ],
+    "project": "sonification",
+    "url": ""
+  },
+  {
+    "year": 2010,
+    "title": "On-demand creation of procedural cities",
+    "authors": "M. Banf, M. Barth, H. Schulze, J. Koch, A. Pritzkau, M. Schmidt, A. Daraban, …",
+    "venue": "Proc. Game and Entertainment Technologies",
+    "type": "conference",
+    "topics": [
+      "vision-assistive"
+    ],
+    "project": null,
+    "url": ""
+  },
+  {
+    "year": 2009,
+    "title": "Example-based rendering of eye movements",
+    "authors": "M. Banf, V. Blanz",
+    "venue": "Computer Graphics Forum 28(2), 659–666 (Eurographics)",
+    "type": "journal",
+    "topics": [
+      "vision-assistive"
+    ],
+    "project": null,
+    "url": "https://doi.org/10.1111/j.1467-8659.2009.01406.x"
+  }
+]

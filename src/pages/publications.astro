@@ -1,0 +1,54 @@
+---
+import Base from '../layouts/Base.astro';
+import publications from '../data/publications.json';
+import topics from '../data/topics.json';
+import profile from '../data/profile.json';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const sorted = [...publications].sort((a, b) => b.year - a.year);
+const years = [...new Set(sorted.map((p) => p.year))];
+const topicOf = (id: string) => topics.find((t) => t.id === id);
+---
+<Base title="Publications" description={`Publications by ${profile.name}`}>
+  <section class="wrap" style="padding-top:48px">
+    <h1>Publications</h1>
+    <p class="muted prose">Journal articles, preprints, workshop and conference papers, {sorted[sorted.length - 1].year}–{sorted[0].year}. The <a href={profile.links.scholar} target="_blank" rel="noopener">Google Scholar profile</a> has citation counts; preprints are linked to arXiv or bioRxiv.</p>
+    <div class="filter-bar" role="group" aria-label="Filter by topic">
+      <button class="chip is-on" type="button" data-filter="all"><span class="dot" style="--chip:var(--fg-faint)"></span>All</button>
+      {topics.map((t) => <button class="chip" type="button" data-filter={t.id} style={`--chip:${t.color}`}><span class="dot"></span>{t.short}</button>)}
+    </div>
+    <div id="pubs">
+      {years.map((y) => (
+        <div class="year-group" data-year={y}>
+          <div class="pub-year">{y}</div>
+          {sorted.filter((p) => p.year === y).map((p) => (
+            <article class="pub" data-topics={p.topics.join(' ') || 'none'}>
+              <div class="title">{p.url ? <a href={p.url} target="_blank" rel="noopener">{p.title}</a> : p.title}</div>
+              <div class="meta">{p.authors}</div>
+              <div class="meta"><em>{p.venue}</em></div>
+              <div class="tags">
+                <span>{p.type}</span>
+                {p.topics.map((id) => <span style={`color:${topicOf(id)?.color}`}>{topicOf(id)?.short}</span>)}
+                {p.project && <a href={`${base}/projects/${p.project}/`}>project page →</a>}
+              </div>
+            </article>
+          ))}
+        </div>
+      ))}
+    </div>
+  </section>
+  <script>
+    const chips = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+    const pubs = document.querySelectorAll<HTMLElement>('.pub');
+    const groups = document.querySelectorAll<HTMLElement>('.year-group');
+    function apply(f: string) {
+      chips.forEach((c) => c.classList.toggle('is-on', c.dataset.filter === f));
+      pubs.forEach((p) => (p.hidden = f !== 'all' && !(p.dataset.topics || '').split(' ').includes(f)));
+      groups.forEach((g) => (g.hidden = ![...g.querySelectorAll<HTMLElement>('.pub')].some((p) => !p.hidden)));
+      history.replaceState(null, '', f === 'all' ? location.pathname : `#${f}`);
+    }
+    chips.forEach((c) => c.addEventListener('click', () => apply(c.dataset.filter!)));
+    const h = location.hash.replace('#', '');
+    if (h && [...chips].some((c) => c.dataset.filter === h)) apply(h);
+  </script>
+</Base>

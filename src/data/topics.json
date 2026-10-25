@@ -1,0 +1,10 @@
+[
+  { "id": "gene-regulation", "title": "Gene regulation & regulatory networks", "short": "Gene regulation", "color": "#2f6f4e", "blurb": "Inferring which transcription factors control which genes, and how to trust those predictions." },
+  { "id": "binding-variation", "title": "TF-binding variation & bQTL", "short": "Binding variation", "color": "#b5542a", "blurb": "Where genetic variation changes transcription-factor occupancy, and what that does to traits in maize." },
+  { "id": "plant-metabolism", "title": "Plant metabolism & gene clusters", "short": "Plant metabolism", "color": "#8a6d1f", "blurb": "Enzymes, pathways and chromosomally clustered biosynthetic genes across plant genomes." },
+  { "id": "genomic-fm", "title": "Genomic foundation models", "short": "Genomic FMs", "color": "#3b5fa8", "blurb": "Plant DNA language models as a substrate for prediction, in-silico mutagenesis and promoter design." },
+  { "id": "geometric-dl", "title": "Geometric & topological deep learning", "short": "Geometric DL", "color": "#6b4fa3", "blurb": "Learning on graphs and beyond: higher-order domains, lifting, curvature and over-squashing." },
+  { "id": "knowledge-graphs", "title": "Knowledge graphs, RAG & agent memory", "short": "Knowledge & agents", "color": "#1f7a8c", "blurb": "Structuring what language models retrieve and remember — ontologies, GraphRAG, memory for software agents." },
+  { "id": "manufacturing-ml", "title": "ML for manufacturing", "short": "Manufacturing", "color": "#8c4a1f", "blurb": "Condition monitoring, retrofits and model monitoring on the shop floor." },
+  { "id": "vision-assistive", "title": "Computer vision & assistive technology", "short": "Vision & assistive", "color": "#a33a5e", "blurb": "Image understanding for people, including people who cannot see the image." }
+]

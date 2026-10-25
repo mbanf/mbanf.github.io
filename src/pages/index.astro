@@ -1,0 +1,113 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import eras from '../data/eras.json';
+import topics from '../data/topics.json';
+import profile from '../data/profile.json';
+import publications from '../data/publications.json';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+
+// Timeline: newest era first; projects within an era by order.
+const erasDesc = [...eras].sort((a, b) => (b.end ?? 9999) - (a.end ?? 9999) || b.start - a.start);
+const byEra = (id: string) => projects.filter((p) => p.data.era === id).sort((a, b) => (b.data.end ?? 9999) - (a.data.end ?? 9999));
+const byTopic = (id: string) => projects.filter((p) => p.data.topics.includes(id));
+const pubCount = (id: string) => publications.filter((p) => p.topics.includes(id)).length;
+const yearSpan = (e: (typeof eras)[number]) => `${e.start} – ${e.end ?? 'now'}`;
+---
+<Base>
+  <section class="wrap hero">
+    <div>
+      <h1>{profile.name}</h1>
+      <p class="lede">{profile.tagline}</p>
+      <p class="intro">{profile.intro}</p>
+      <div class="links">
+        <a href={profile.links.scholar} target="_blank" rel="me noopener">Google Scholar</a>
+        <a href={profile.links.github} target="_blank" rel="me noopener">GitHub</a>
+        <a href={`mailto:${profile.email}`}>{profile.email}</a>
+        <a href={`${base}/publications/`}>All publications →</a>
+      </div>
+    </div>
+    <div class="portrait placeholder" aria-hidden="true">MB</div>
+  </section>
+
+  <div class="switch-bar" id="work">
+    <div class="wrap">
+      <div class="segmented" role="group" aria-label="Choose how to browse">
+        <button type="button" data-view="timeline" aria-pressed="true">By time</button>
+        <button type="button" data-view="topics" aria-pressed="false">By topic</button>
+      </div>
+      <span class="view-hint" data-hint-for="timeline">Research and industry work in the order it happened.</span>
+      <span class="view-hint" data-hint-for="topics" hidden>The same work, grouped by what it is about.</span>
+    </div>
+  </div>
+
+  <section class="wrap view is-active" id="timeline" data-view-panel="timeline">
+    <div class="timeline">
+      {erasDesc.map((era) => (
+        <article class={`era ${era.kind}`} id={`era-${era.id}`}>
+          <header class="era-head">
+            <div class="era-years">{yearSpan(era)}<span class="era-kind">{era.kind}</span></div>
+            <h2 class="era-title">{era.title}</h2>
+            <div class="era-place">{era.place}</div>
+            <p class="era-blurb">{era.blurb}</p>
+          </header>
+          {byEra(era.id).length > 0 ? (
+            <div class="cards">{byEra(era.id).map((p) => <ProjectCard project={p} />)}</div>
+          ) : (
+            <p class="faint small">Project pages for this period are still being written — see <a href={`${base}/publications/`}>publications</a>.</p>
+          )}
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="wrap view" id="topics" data-view-panel="topics">
+    <nav class="chips topic-nav" aria-label="Jump to topic">
+      {topics.map((t) => (
+        <a class="chip" href={`#topic-${t.id}`} style={`--chip:${t.color}`}><span class="dot"></span>{t.short}<span class="faint">{byTopic(t.id).length || pubCount(t.id)}</span></a>
+      ))}
+    </nav>
+    {topics.map((t) => (
+      <section class="topic-section" id={`topic-${t.id}`} style={`--chip:${t.color}`}>
+        <div class="topic-head"><span class="swatch"></span><h2>{t.title}</h2></div>
+        <p class="topic-blurb">{t.blurb}</p>
+        {byTopic(t.id).length > 0 ? (
+          <div class="cards">{byTopic(t.id).map((p) => <ProjectCard project={p} />)}</div>
+        ) : (
+          <p class="faint small">{pubCount(t.id)} publications on this topic — <a href={`${base}/publications/#${t.id}`}>see the list</a>.</p>
+        )}
+      </section>
+    ))}
+  </section>
+
+  <script>
+    const buttons = document.querySelectorAll<HTMLButtonElement>('[data-view]');
+    const panels = document.querySelectorAll<HTMLElement>('[data-view-panel]');
+    const hints = document.querySelectorAll<HTMLElement>('[data-hint-for]');
+    function show(view: string, push = true) {
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.view === view)));
+      panels.forEach((p) => p.classList.toggle('is-active', p.dataset.viewPanel === view));
+      hints.forEach((h) => (h.hidden = h.dataset.hintFor !== view));
+      try { localStorage.setItem('view', view); } catch (e) {}
+      if (push) history.replaceState(null, '', `#${view}`);
+    }
+    buttons.forEach((b) => b.addEventListener('click', () => show(b.dataset.view!)));
+    function fromHash() {
+      const h = location.hash.replace('#', '');
+      if (h === 'timeline' || h === 'topics') return h;
+      if (h.startsWith('topic-')) return 'topics';
+      if (h.startsWith('era-')) return 'timeline';
+      return null;
+    }
+    let initial = fromHash();
+    if (!initial) { try { initial = localStorage.getItem('view'); } catch (e) {} }
+    show(initial === 'topics' ? 'topics' : 'timeline', false);
+    if (location.hash.startsWith('#topic-') || location.hash.startsWith('#era-')) {
+      requestAnimationFrame(() => document.querySelector(location.hash)?.scrollIntoView());
+    }
+    window.addEventListener('hashchange', () => { const v = fromHash(); if (v) show(v, false); });
+  </script>
+</Base>
