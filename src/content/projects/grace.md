@@ -44,6 +44,4 @@ On *Drosophila melanogaster* and *Arabidopsis thaliana* data GRACE outperformed 
 
 ## What came after
 
-The [BBA review](https://doi.org/10.1016/j.bbagrm.2016.09.003) with Sue Rhee surveys the field's approaches and their limits; the 2021 *Computation* paper with Thomas Hartwig revisits scalable, randomised integrative inference; and the [2023 Frontiers review](https://doi.org/10.3389/fpls.2023.1330793) connects the classical network-inference view to modern sequence-to-function models — the bridge to the [bQTL work](/projects/maize-bqtl/) and to [genomic foundation models](/projects/bqtl-predict/).
-
-GRACE-style integration also fed into collaborative biology: the [ARSK1 study](/projects/arsk1-phosphate/) in *Current Biology* (2023) used it to position ARSK1 as a hub of the phosphate-deficiency regulatory network in Arabidopsis.
+The [BBA review](https://doi.org/10.1016/j.bbagrm.2016.09.003) with Sue Rhee surveys the field's approaches and their limits; the [2021 *Computation* survey](/projects/randomness-grn/) with Thomas Hartwig makes the case for randomised, scalable integrative inference; and the [2023 Frontiers review](https://doi.org/10.3389/fpls.2023.1330793) connects the classical network-inference view to modern sequence-to-function models — the bridge to the [bQTL work](/projects/maize-bqtl/) and to [genomic foundation models](/projects/bqtl-predict/).
